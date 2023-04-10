@@ -13,11 +13,7 @@ app.post("/sign-up", (req, res) => {
   const { username, avatar } = req.body;
 
   if (!username || !avatar) {
-    return res.status(400).send("Todos os campos são obrigatórios");
-  }
-
-  if (typeof username !== string || typeof avatar !== string){
-    return res.status(400).send("Os valores de username e avatar devem ser strings!")
+    return res.status(422).send("Revise os campos de formulário");
   }
 
   usuario.push({ username, avatar });
@@ -31,14 +27,6 @@ app.post("/tweets", (req, res) => {
     res.send("UNAUTHORIZED");
   }
 
-  if (!username || !tweet) {
-    return res.status(400).send("Todos os campos são obrigatórios");
-  }
-
-  if (typeof username !== string || typeof tweet !== string){
-    return res.status(400).send("Os valores de username e avatar devem ser strings!")
-  }
-
   tweets.push({ username, tweet });
   res.send("OK");
 });
@@ -47,10 +35,9 @@ app.get("/tweets", (req, res) => {
   if (tweets.length === 0) {
     res.send([]);
   }
+  const limitarTweets = tweets.slice(0,10)
 
-  const limitedTweets = tweets.slice(0, 10);
-
-  const userInfos = limitedTweets.map((tweet) => ({
+  const userInfos = limitarTweets.map((tweet) => ({
     username: tweet.username,
     tweet: tweet.tweet,
     avatar: usuario.find((u) => u.username === tweet.username).avatar,
