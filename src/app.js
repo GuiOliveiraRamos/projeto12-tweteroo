@@ -35,7 +35,16 @@ app.get("/tweets", (req, res) => {
   if (tweets.length === 0) {
     res.send([]);
   }
-  res.send(tweets);
+
+  const limitedTweets = tweets.slice(0, 10);
+
+  const userInfos = limitedTweets.map((tweet) => ({
+    username: tweet.username,
+    tweet: tweet.tweet,
+    avatar: usuario.find((u) => u.username === tweet.username).avatar,
+  }));
+
+  res.send(userInfos);
 });
 
 const PORT = 5000;

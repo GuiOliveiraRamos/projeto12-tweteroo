@@ -15,5 +15,14 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "nodemon": "^2.0.22"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GuiOliveiraRamos/projeto12-tweteroo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GuiOliveiraRamos/projeto12-tweteroo/issues"
+  },
+  "homepage": "https://github.com/GuiOliveiraRamos/projeto12-tweteroo#readme"
 }
