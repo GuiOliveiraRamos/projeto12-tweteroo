@@ -13,7 +13,11 @@ app.post("/sign-up", (req, res) => {
   const { username, avatar } = req.body;
 
   if (!username || !avatar) {
-    return res.status(422).send("Revise os campos de formulário");
+    return res.status(400).send("Todos os campos são obrigatórios");
+  }
+
+  if (typeof username !== string || typeof avatar !== string){
+    return res.status(400).send("Os valores de username e avatar devem ser strings!")
   }
 
   usuario.push({ username, avatar });
@@ -25,6 +29,14 @@ app.post("/tweets", (req, res) => {
   const verificarUsuario = usuario.find((u) => u.username === username);
   if (!verificarUsuario) {
     res.send("UNAUTHORIZED");
+  }
+
+  if (!username || !tweet) {
+    return res.status(400).send("Todos os campos são obrigatórios");
+  }
+
+  if (typeof username !== string || typeof tweet !== string){
+    return res.status(400).send("Os valores de username e avatar devem ser strings!")
   }
 
   tweets.push({ username, tweet });
